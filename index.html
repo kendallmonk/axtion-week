@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Axtion Week v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --navy:#1a1f2e;--navy-mid:#232b3e;--navy-light:#2d3650;
+    --work:#3b6fd4;--work-light:#e8eefb;
+    --health:#2d9e6b;--health-light:#e6f5ee;
+    --family:#e07b2a;--family-light:#fdf0e4;
+    --flex:#7c52c8;--flex-light:#f0ecfb;
+    --rest:#4a9bb5;
+    --neutral:#f5f6f8;--text:#1a1f2e;--text-mid:#4a5068;--text-light:#8891a8;
+    --rule:#e2e5ed;--white:#fff;--red:#d94040;--green:#5dba8a;
+    --med:#c0873f;--med-light:#fdf5ec;
+    --elliot:#e8a020;--elliot-light:#fef6e4;
+    --read:#2d7a9e;--read-light:#e8f4f8;
+    --ba:#4a9bb5;--ba-light:#e6f2f5;
+    --una:#b5507a;--una-light:#faeaf1;
+  }
+  body{font-family:'Inter',sans-serif;background:var(--neutral);color:var(--text);min-height:100vh}
+
+  .hdr{background:var(--navy);padding:22px 32px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .hdr-title{font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.5px;text-transform:uppercase}
+  .hdr-sub{font-size:10px;font-weight:500;color:var(--text-light);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
+  .pills{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap}
+  .pill{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 13px;border-radius:20px;color:#fff}
+  .p-work{background:var(--work)}.p-fam{background:var(--family)}.p-hrs{background:var(--health)}
+
+  .main{display:grid;grid-template-columns:1.8fr 1.6fr 1.1fr 1.2fr 1fr;gap:0}
+
+  .col{border-right:1px solid var(--rule)}
+  .col:last-child{border-right:none}
+  .col-head{padding:13px 16px 11px;border-bottom:3px solid transparent}
+  .ch-work{border-color:var(--work);background:var(--work-light)}
+  .ch-work2{border-color:#4a8ad4;background:#eef3fc}
+  .ch-flex{border-color:var(--flex);background:var(--flex-light)}
+  .ch-off{border-color:var(--family);background:var(--family-light)}
+  .ch-side{border-color:var(--navy-light);background:var(--navy)}
+  .col-tag{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+  .ct-work{color:var(--work)}.ct-work2{color:#4a8ad4}.ct-flex{color:var(--flex)}.ct-off{color:var(--family)}.ct-side{color:var(--text-light)}
+  .col-name{font-size:16px;font-weight:900;color:var(--navy);line-height:1.1}
+  .ch-side .col-name{color:#fff}
+  .col-line{font-size:9px;color:var(--text-mid);margin-top:3px;font-weight:500;line-height:1.5}
+  .ch-side .col-line{color:var(--text-light)}
+
+  .blocks{padding:12px;display:flex;flex-direction:column;gap:6px}
+  .blk{border-radius:7px;padding:8px 10px;border-left:3px solid transparent}
+  .bt{font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;opacity:.85}
+  .bn{font-size:10px;font-weight:700;line-height:1.2;margin-bottom:2px}
+  .bd{font-size:9px;line-height:1.4;opacity:.8}
+
+  .b-ritual{background:var(--med-light);border-color:var(--med)}.b-ritual .bt,.b-ritual .bn{color:var(--med)}
+  .b-move{background:var(--health-light);border-color:var(--health)}.b-move .bt,.b-move .bn{color:var(--health)}
+  .b-med{background:#f0ecfb;border-color:#9b7fd4}.b-med .bt,.b-med .bn{color:#7c52c8}
+  .b-work{background:var(--work-light);border-color:var(--work)}.b-work .bt,.b-work .bn{color:var(--work)}
+  .b-read{background:var(--read-light);border-color:var(--read)}.b-read .bt,.b-read .bn{color:var(--read)}
+  .b-myls{background:#f0ecfb;border-color:var(--flex)}.b-myls .bt,.b-myls .bn{color:var(--flex)}
+  .b-admin{background:#f0f2f5;border-color:#8891a8}.b-admin .bt,.b-admin .bn{color:#5a6070}
+  .b-lunch{background:#fafafa;border:1px solid var(--rule);border-left:3px solid var(--rule)}
+  .b-lunch .bt,.b-lunch .bn{color:var(--text-light)}
+  .b-fam{background:var(--family-light);border-color:var(--family)}.b-fam .bt,.b-fam .bn{color:var(--family)}
+  .b-elliot{background:var(--elliot-light);border-color:var(--elliot)}.b-elliot .bt,.b-elliot .bn{color:var(--elliot)}
+  .b-eve{background:var(--navy-mid);border-color:var(--rest)}.b-eve .bt{color:var(--text-light)}.b-eve .bn{color:#fff}.b-eve .bd{color:var(--text-light)}
+  .b-slp{background:var(--navy);border-color:var(--work)}.b-slp .bt{color:var(--text-light)}.b-slp .bn{color:#fff}
+  .b-flex{background:var(--flex-light);border-color:var(--flex)}.b-flex .bt,.b-flex .bn{color:var(--flex)}
+  .b-off{background:var(--family-light);border-color:var(--family)}.b-off .bt,.b-off .bn{color:var(--family)}
+  .b-z2{background:var(--health-light);border-color:var(--health)}.b-z2 .bt,.b-z2 .bn{color:var(--health)}
+  .b-ba{background:var(--ba-light);border-color:var(--ba)}.b-ba .bt,.b-ba .bn{color:var(--ba)}
+  .b-una{background:var(--una-light);border-color:var(--una)}.b-una .bt,.b-una .bn{color:var(--una)}
+
+  .badge{display:inline-block;font-size:7px;font-weight:700;padding:2px 6px;border-radius:10px;margin-left:4px;vertical-align:middle;background:var(--work);color:#fff}
+  .badge-grey{background:#8891a8}
+  .badge-med{background:var(--flex)}
+  .badge-read{background:var(--read)}
+  .badge-postlaunch{background:#5a6070;color:#fff;letter-spacing:1px}
+
+  .work-banner{color:#fff;font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;margin:0 12px 2px;border-radius:4px;text-align:center}
+  .wb-a{background:var(--work)}
+  .wb-b{background:#4a8ad4}
+  .wb-c{background:#7c52c8}
+  .wb-mgmt{background:linear-gradient(90deg,var(--ba),var(--una))}
+  .divider{height:1px;background:var(--rule);margin:2px 12px}
+
+  .sidebar{background:var(--navy);padding:16px 14px;display:flex;flex-direction:column;gap:14px}
+  .s-sec h3{font-size:7px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--navy-light)}
+  .rule-item{font-size:8px;color:#aab0c0;line-height:1.7;display:flex;gap:5px}
+  .rule-item::before{content:"—";color:var(--work);font-weight:700;flex-shrink:0}
+  .axed{font-size:8px;color:var(--red);line-height:1.8;display:flex;gap:5px}
+  .axed::before{content:"✕";font-weight:700;flex-shrink:0}
+  .fri-yes{font-size:8px;color:var(--green);line-height:1.8;display:flex;gap:5px}
+  .fri-yes::before{content:"✓";font-weight:700;flex-shrink:0}
+
+  /* BOTTOM */
+  .bottom{background:var(--navy);border-top:2px solid var(--navy-light);padding:18px 32px;display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start}
+  .bot-sec h4{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:9px}
+  .srow{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+  .sbar-w{width:80px;height:4px;background:var(--navy-light);border-radius:2px;overflow:hidden}
+  .sbar{height:100%;border-radius:2px}
+  .slbl{font-size:9px;color:#aab0c0;min-width:110px}
+  .sval{font-size:9px;font-weight:700;color:#fff}
+  .domain-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+  .dot{width:7px;height:7px;border-radius:50%;margin-top:3px;flex-shrink:0}
+  .dn{font-size:10px;font-weight:700;color:#fff;margin-bottom:1px}
+  .dd{font-size:8px;color:var(--text-light);line-height:1.4}
+
+  /* Alternating weeks table */
+  .alt-wrap{border-radius:6px;overflow:hidden;border:1px solid var(--navy-light)}
+  .alt-row{display:grid;grid-template-columns:80px 1fr 1fr;font-size:9px}
+  .alt-row.header{background:var(--navy-light)}
+  .alt-row.week-a{background:#1e2538}
+  .alt-row.week-b{background:#1a1f2e}
+  .alt-cell{padding:7px 10px;color:#aab0c0;border-right:1px solid var(--navy-light)}
+  .alt-cell:last-child{border-right:none}
+  .alt-cell.label{font-weight:700;color:var(--text-light);font-size:8px;letter-spacing:1px;text-transform:uppercase}
+  .alt-cell.myls{color:var(--family);font-weight:700}
+  .alt-cell.arc{color:var(--flex);font-weight:700}
+  .alt-cell.hdr{color:var(--text-light);font-weight:700;font-size:8px;letter-spacing:1px;text-transform:uppercase}
+
+  .hormozi{background:var(--navy-mid);border-radius:6px;padding:9px 10px}
+  .hz-title{font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);margin-bottom:6px}
+  .hz-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+  .hz-lbl{font-size:8px;color:#aab0c0;min-width:48px}
+  .hz-bar-w{flex:1;height:4px;background:var(--navy-light);border-radius:2px;overflow:hidden}
+  .hz-bar{height:100%;border-radius:2px}
+  .hz-val{font-size:8px;font-weight:700;color:#fff;min-width:24px;text-align:right}
+  .hz-note{font-size:7px;color:var(--text-light);font-style:italic;margin-top:4px}
+
+  .phil{margin-left:auto;text-align:right}
+  .phil p{font-size:10px;color:var(--text-light);font-style:italic;line-height:2}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div>
+    <div class="hdr-title">The Axtion Week <span style="color:var(--work);font-size:14px;font-weight:500">v2</span></div>
+    <div class="hdr-sub">Build signal &nbsp;·&nbsp; Protect family &nbsp;·&nbsp; Stay in motion</div>
+  </div>
+  <div class="pills">
+    <span class="pill p-work">4 Work Days</span>
+    <span class="pill p-fam">3 Off Days</span>
+    <span class="pill p-hrs">30 hrs / week</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- MON / WED -->
+  <div class="col">
+    <div class="col-head ch-work">
+      <div class="col-tag ct-work">Work Days — Management</div>
+      <div class="col-name">Mon · Wed</div>
+      <div class="col-line">8:30am start · 4:00pm finish · 4hr Block A + 2hr Block B<br>Movement: Mobility/Strength &nbsp;·&nbsp; School drop-off 7:45am</div>
+    </div>
+    <div class="blocks">
+
+      <div class="blk b-move">
+        <div class="bt">6:00 – 6:30</div>
+        <div class="bn">Movement — Mobility/Strength</div>
+        <div class="bd">30 min · Fasted</div>
+      </div>
+
+      <div class="blk b-ritual">
+        <div class="bt">6:30 – 7:30</div>
+        <div class="bn">Shower + Family Breakfast</div>
+        <div class="bd">Coffee for you · Breakfast with Elliot</div>
+      </div>
+
+      <div class="blk b-fam">
+        <div class="bt">7:45</div>
+        <div class="bn">Drop Elliot at School</div>
+        <div class="bd">Mon / Wed / Thu</div>
+      </div>
+
+      <div class="blk b-med">
+        <div class="bt">8:15 – 8:25</div>
+        <div class="bn">Meditation <span class="badge badge-med">10 min</span></div>
+        <div class="bd">Quiet · Intention · Begin</div>
+      </div>
+
+      <div class="work-banner wb-a">Block A — 100% Signal · KendallMonk</div>
+
+      <div class="blk b-work">
+        <div class="bt">8:30 – 12:30</div>
+        <div class="bn">Work Block A <span class="badge">4 hrs</span></div>
+        <div class="bd">Signal · KendallMonk · Deep output only · No meetings · No admin · No other projects</div>
+      </div>
+
+      <div class="blk b-lunch">
+        <div class="bt">12:30 – 1:30</div>
+        <div class="bn">Lunch + Reading + Meditation <span class="badge badge-read">1 hr</span></div>
+        <div class="bd">Eat · Non-fiction · Reset · KM writing gets first claim into Block B</div>
+      </div>
+
+      <div class="work-banner wb-mgmt">Block B — Brand Architect + Unaserism</div>
+
+      <div class="blk b-ba">
+        <div class="bt">1:30 – 2:30</div>
+        <div class="bn">Brand Architect <span class="badge" style="background:var(--ba)">1 hr</span></div>
+        <div class="bd">Low-touch · Management-type work</div>
+      </div>
+
+      <div class="blk b-una">
+        <div class="bt">2:30 – 3:30</div>
+        <div class="bn">Unaserism <span class="badge" style="background:var(--una)">1 hr</span></div>
+        <div class="bd">Chatbot/Discord · Management-type work</div>
+      </div>
+
+      <div class="blk b-admin">
+        <div class="bt">3:30 – 4:00</div>
+        <div class="bn">Business Admin <span class="badge badge-grey">30 min</span></div>
+        <div class="bd">Email · Planning · Scheduling · Financial review</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="blk b-fam">
+        <div class="bt">4:00 – 7:00</div>
+        <div class="bn">Family Time + Dinner</div>
+        <div class="bd">Elliot · Kate · Connection</div>
+      </div>
+
+      <div class="blk b-elliot">
+        <div class="bt">7:00 – 8:00</div>
+        <div class="bn">Elliot Bedtime</div>
+        <div class="bd">Wind down · Story · Settle</div>
+      </div>
+
+      <div class="blk b-eve">
+        <div class="bt">8:00 – 9:30</div>
+        <div class="bn">Evening — Side Quests</div>
+        <div class="bd">Indonesian (10–20 min) · Photo books · POS SaaS dev</div>
+      </div>
+
+      <div class="blk b-slp">
+        <div class="bt">10:00 PM</div>
+        <div class="bn">Sleep · No phones · 8 hrs</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TUE / THU -->
+  <div class="col">
+    <div class="col-head ch-work2">
+      <div class="col-tag ct-work2">Work Days — Creative</div>
+      <div class="col-name">Tue · Thu</div>
+      <div class="col-line">8:30am start · 4:00pm finish · 4hr Block A + 2hr Block B<br>Movement: Mobility/Stretch &nbsp;·&nbsp; Tue: nanny, no drop-off &nbsp;·&nbsp; Thu: drop-off 7:45am</div>
+    </div>
+    <div class="blocks">
+
+      <div class="blk b-move">
+        <div class="bt">6:00 – 6:30</div>
+        <div class="bn">Movement — Mobility/Stretch</div>
+        <div class="bd">30 min · Fasted</div>
+      </div>
+
+      <div class="blk b-ritual">
+        <div class="bt">6:30 – 7:30</div>
+        <div class="bn">Shower + Family Breakfast</div>
+        <div class="bd">Coffee for you · Breakfast with Elliot</div>
+      </div>
+
+      <div class="blk b-fam">
+        <div class="bt">7:45</div>
+        <div class="bn">Drop Elliot at School</div>
+        <div class="bd">Thu only · Tue is a nanny day, no drop-off</div>
+      </div>
+
+      <div class="blk b-med">
+        <div class="bt">8:15 – 8:25</div>
+        <div class="bn">Meditation <span class="badge badge-med">10 min</span></div>
+        <div class="bd">Quiet · Intention · Begin</div>
+      </div>
+
+      <div class="work-banner wb-a">Block A — 100% Signal · KendallMonk</div>
+
+      <div class="blk b-work">
+        <div class="bt">8:30 – 12:30</div>
+        <div class="bn">Work Block A <span class="badge">4 hrs</span></div>
+        <div class="bd">Signal · KendallMonk · Deep output only · No meetings · No admin · No other projects</div>
+      </div>
+
+      <div class="blk b-lunch">
+        <div class="bt">12:30 – 1:30</div>
+        <div class="bn">Lunch + Reading + Meditation <span class="badge badge-read">1 hr</span></div>
+        <div class="bd">Eat · Non-fiction · Reset</div>
+      </div>
+
+      <div class="work-banner wb-c">Block B — MYLS or The Arc</div>
+
+      <div class="blk b-myls">
+        <div class="bt">1:30 – 3:30</div>
+        <div class="bn">MYLS or The Arc <span class="badge badge-med">2 hrs</span></div>
+        <div class="bd">Week 1: MYLS both days &nbsp;·&nbsp; Week 2: The Arc both days · Creative-type work</div>
+      </div>
+
+      <div class="blk b-admin">
+        <div class="bt">3:30 – 4:00</div>
+        <div class="bn">Business Admin <span class="badge badge-grey">30 min</span></div>
+        <div class="bd">Email · Planning · Scheduling · Financial review</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="blk b-fam">
+        <div class="bt">4:00 – 7:00</div>
+        <div class="bn">Family Time + Dinner</div>
+        <div class="bd">Elliot · Kate · Connection</div>
+      </div>
+
+      <div class="blk b-elliot">
+        <div class="bt">7:00 – 8:00</div>
+        <div class="bn">Elliot Bedtime</div>
+        <div class="bd">Wind down · Story · Settle</div>
+      </div>
+
+      <div class="blk b-eve">
+        <div class="bt">8:00 – 9:30</div>
+        <div class="bn">Evening — Side Quests</div>
+        <div class="bd">Indonesian (10–20 min) · Photo books · POS SaaS dev</div>
+      </div>
+
+      <div class="blk b-slp">
+        <div class="bt">10:00 PM</div>
+        <div class="bn">Sleep · No phones · 8 hrs</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FRIDAY -->
+  <div class="col">
+    <div class="col-head ch-flex">
+      <div class="col-tag ct-flex">Variable Day</div>
+      <div class="col-name">Friday</div>
+      <div class="col-line">No school — Elliot's day off<br>Nanny 8–12 · overflow counted in the 30 hrs</div>
+    </div>
+    <div class="blocks">
+
+      <div class="blk b-move">
+        <div class="bt">6:00 – 6:30</div>
+        <div class="bn">Movement</div>
+        <div class="bd">30 min · Fasted</div>
+      </div>
+
+      <div class="blk b-ritual">
+        <div class="bt">6:30 – 7:30</div>
+        <div class="bn">Shower + Family Breakfast</div>
+        <div class="bd">Coffee · Breakfast with Elliot</div>
+      </div>
+
+      <div class="blk b-med">
+        <div class="bt">7:30 – 7:45</div>
+        <div class="bn">Meditation <span class="badge badge-med">10 min</span></div>
+        <div class="bd">Quiet · Intention · Begin</div>
+      </div>
+
+      <div class="blk b-flex">
+        <div class="bt">8:00 – 12:00</div>
+        <div class="bn">Nanny Window <span class="badge badge-med">4 hrs</span></div>
+        <div class="bd">Overflow — life admin, work, or business admin</div>
+      </div>
+
+      <div class="blk b-off">
+        <div class="bt">If Away</div>
+        <div class="bn">Travel / Family</div>
+        <div class="bd">Fully off · Trip begins · No admin</div>
+      </div>
+
+      <div class="blk b-fam">
+        <div class="bt">12:00 – 7:00</div>
+        <div class="bn">Family Time + Dinner</div>
+        <div class="bd">Early finish · Long afternoon together</div>
+      </div>
+
+      <div class="blk b-elliot">
+        <div class="bt">7:00 – 8:00</div>
+        <div class="bn">Elliot Bedtime</div>
+        <div class="bd">Wind down · Story · Settle</div>
+      </div>
+
+      <div class="blk b-eve">
+        <div class="bt">8:00 – 9:30</div>
+        <div class="bn">Movies · TV · Pool</div>
+        <div class="bd">Wind down freely · No Side Quest pressure</div>
+      </div>
+
+      <div class="blk b-slp">
+        <div class="bt">10:00 PM</div>
+        <div class="bn">Sleep · No phones · 8 hrs</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SAT + SUN -->
+  <div class="col">
+    <div class="col-head ch-off">
+      <div class="col-tag ct-off">Off Days</div>
+      <div class="col-name">Sat · Sun</div>
+      <div class="col-line">Presence. Recovery. Play.</div>
+    </div>
+    <div class="blocks">
+
+      <div class="blk b-ritual">
+        <div class="bt">Morning</div>
+        <div class="bn">Slow Start</div>
+        <div class="bd">Lie in · Coffee · Breakfast together · No rush · No schedule</div>
+      </div>
+
+      <div class="blk b-off">
+        <div class="bt">Day</div>
+        <div class="bn">Family Adventures</div>
+        <div class="bd">Beach · Parks · Swimming · BBQ · Bike rides · Markets · Exploring Bali</div>
+      </div>
+
+      <div class="blk b-z2">
+        <div class="bt">Once across Fri–Sun</div>
+        <div class="bn">Zone 2 Cardio</div>
+        <div class="bd">30–60 min · Run · Walk · Swim · Pick the day that fits</div>
+      </div>
+
+      <div class="blk b-fam">
+        <div class="bt">4:30 – 7:00</div>
+        <div class="bn">Family Time + Dinner</div>
+        <div class="bd">Together · No guilt · No work</div>
+      </div>
+
+      <div class="blk b-elliot">
+        <div class="bt">7:00 – 8:00</div>
+        <div class="bn">Elliot Bedtime</div>
+        <div class="bd">Wind down · Story · Settle</div>
+      </div>
+
+      <div class="blk b-eve">
+        <div class="bt">8:00 – 9:30</div>
+        <div class="bn">Movies · TV · Pool · Mindful Stretching</div>
+        <div class="bd">Freely · No skill acquisition pressure</div>
+      </div>
+
+      <div class="blk b-slp">
+        <div class="bt">10:00 PM</div>
+        <div class="bn">Sleep · No phones · 8 hrs</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="col" style="border-right:none">
+    <div class="col-head ch-side">
+      <div class="col-tag ct-side">System</div>
+      <div class="col-name">Principles</div>
+      <div class="col-line">What runs underneath</div>
+    </div>
+    <div class="sidebar">
+
+      <div class="s-sec">
+        <h3>System Rules</h3>
+        <div class="rule-item">6am workout · always first</div>
+        <div class="rule-item">Mon/Wed — Mobility + Strength</div>
+        <div class="rule-item">Tue/Thu — Mobility + Stretch</div>
+        <div class="rule-item">Meditation 8:15am + folded into lunch</div>
+        <div class="rule-item">Block A — 100% Signal/KM · no other projects</div>
+        <div class="rule-item">Elliot drop-off 7:45am · Mon/Wed/Thu</div>
+        <div class="rule-item">Tue — nanny day, no drop-off</div>
+        <div class="rule-item">All work days: 8:30am – 4:00pm</div>
+        <div class="rule-item">30 min admin daily · 3:30–4:00pm</div>
+        <div class="rule-item">Reading folded into lunch · 12:30–1:30</div>
+        <div class="rule-item">Mon/Wed Block B — Brand Architect + Unaserism</div>
+        <div class="rule-item">Tue/Thu Block B — MYLS or The Arc, alternating</div>
+        <div class="rule-item">Zone 2 once/week · floats Fri–Sun</div>
+        <div class="rule-item">Family days fully off · no guilt</div>
+        <div class="rule-item">10pm sleep · No phones in bedroom</div>
+      </div>
+
+      <div class="s-sec">
+        <h3>Friday Logic</h3>
+        <div class="fri-yes">No school — Elliot's day off</div>
+        <div class="fri-yes">Same morning shape, no rush</div>
+        <div class="fri-yes">8–12 nanny → admin/work/life-admin overflow</div>
+        <div class="fri-yes">Family time from 12pm</div>
+        <div class="fri-yes">Away → Fully off, trip begins</div>
+        <div class="fri-yes">Zone 2 floats to any of Fri–Sun</div>
+      </div>
+
+      <div class="s-sec">
+        <h3>Axed</h3>
+        <div class="axed">Harmonica · 3D Design</div>
+        <div class="axed">Work on family / off days</div>
+        <div class="axed">Admin bleeding into deep work</div>
+        <div class="axed">Passive evening scrolling</div>
+        <div class="axed">Split day complexity</div>
+        <div class="axed">Fragmented identity</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom">
+
+  <div class="bot-sec">
+    <h4>Weekly Hours — 30 hrs</h4>
+    <div class="srow"><span class="slbl">Block A (Mon–Thu)</span><div class="sbar-w"><div class="sbar" style="width:53%;background:var(--work)"></div></div><span class="sval">4 hrs × 4 = 16</span></div>
+    <div class="srow"><span class="slbl">Block B (Mon–Thu)</span><div class="sbar-w"><div class="sbar" style="width:27%;background:#7c52c8"></div></div><span class="sval">2 hrs × 4 = 8</span></div>
+    <div class="srow"><span class="slbl">Admin (4 days × 30 min)</span><div class="sbar-w"><div class="sbar" style="width:7%;background:#8891a8"></div></div><span class="sval">2 hrs</span></div>
+    <div class="srow"><span class="slbl">Friday nanny overflow</span><div class="sbar-w"><div class="sbar" style="width:13%;background:var(--flex)"></div></div><span class="sval">4 hrs</span></div>
+    <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--navy-light)">
+      <span style="font-size:11px;font-weight:800;color:#fff">30 hrs total</span>
+      <span style="font-size:9px;color:var(--text-light);margin-left:8px">16 + 8 + 2 + 4</span>
+    </div>
+  </div>
+
+  <div class="bot-sec">
+    <h4>Core Domains</h4>
+    <div class="domain-row"><div class="dot" style="background:var(--work)"></div><div><div class="dn">Signal / KendallMonk.com</div><div class="dd">Systems thinking · Writing · Publishing · 66.7% · 16 hrs/wk · Block A, all 4 days</div></div></div>
+    <div class="domain-row"><div class="dot" style="background:var(--family)"></div><div><div class="dn">MYLS</div><div class="dd">Music · HumanAI · Creative · 8.3% avg · 4 hrs/wk on-week · Week 1 · Tue + Thu Block B</div></div></div>
+    <div class="domain-row"><div class="dot" style="background:var(--flex)"></div><div><div class="dn">The Arc</div><div class="dd">Development only · 8.3% avg · 4 hrs/wk on-week · Week 2 · Tue + Thu Block B</div></div></div>
+    <div class="domain-row"><div class="dot" style="background:var(--ba)"></div><div><div class="dn">Brand Architect</div><div class="dd">Management-type · 8.3% · 2 hrs/wk · Mon + Wed Block B</div></div></div>
+    <div class="domain-row"><div class="dot" style="background:var(--una)"></div><div><div class="dn">Unaserism</div><div class="dd">Management-type · 8.3% · 2 hrs/wk · Mon + Wed Block B</div></div></div>
+    <div class="domain-row"><div class="dot" style="background:var(--read)"></div><div><div class="dn">Reading</div><div class="dd">Non-fiction · Folded into lunch · Daily 12:30–1:30</div></div></div>
+  </div>
+
+  <div class="bot-sec">
+    <h4>Alternating Weeks</h4>
+    <div class="alt-wrap">
+      <div class="alt-row header">
+        <div class="alt-cell hdr">Week</div>
+        <div class="alt-cell hdr">Tuesday Block B</div>
+        <div class="alt-cell hdr">Thursday Block B</div>
+      </div>
+      <div class="alt-row week-a">
+        <div class="alt-cell label">Week 1</div>
+        <div class="alt-cell myls">MYLS · 2 hrs</div>
+        <div class="alt-cell myls">MYLS · 2 hrs</div>
+      </div>
+      <div class="alt-row week-b">
+        <div class="alt-cell label">Week 2</div>
+        <div class="alt-cell arc">The Arc · 2 hrs</div>
+        <div class="alt-cell arc">The Arc · 2 hrs</div>
+      </div>
+    </div>
+    <p style="font-size:8px;color:var(--text-light);margin-top:7px;font-style:italic">4 hrs per domain per fortnight · Never both in the same week</p>
+  </div>
+
+  <div class="bot-sec">
+    <h4>Hormozi Split <span class="badge badge-postlaunch">Post-Launch</span></h4>
+    <div class="hormozi">
+      <div class="hz-row"><span class="hz-lbl">Build</span><div class="hz-bar-w"><div class="hz-bar" style="width:50%;background:var(--work)"></div></div><span class="hz-val">50%</span></div>
+      <div class="hz-row"><span class="hz-lbl">Promote</span><div class="hz-bar-w"><div class="hz-bar" style="width:25%;background:var(--green)"></div></div><span class="hz-val">25%</span></div>
+      <div class="hz-row"><span class="hz-lbl">Manage</span><div class="hz-bar-w"><div class="hz-bar" style="width:25%;background:#8891a8"></div></div><span class="hz-val">25%</span></div>
+      <div class="hz-note">Not active yet · matures to 1/3 · 1/3 · 1/3 as Signal &amp; KM scale</div>
+    </div>
+  </div>
+
+  <div class="phil">
+    <p>Coherence over optimisation.</p>
+    <p>Long-term over short-term.</p>
+    <p>Life over everything.</p>
+  </div>
+
+</div>
+
+</body>
+</html>
