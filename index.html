@@ -136,6 +136,8 @@
 </head>
 <body>
 
+<div id="gate-content" style="display:none">
+
 <div class="hdr">
   <div>
     <div class="hdr-title">The Axtion Week <span style="color:var(--work);font-size:14px;font-weight:500">v2</span></div>
@@ -569,6 +571,144 @@
   </div>
 
 </div>
+
+</div>
+
+<!-- ── PASSWORD GATE ── -->
+<div id="gate-lock" style="
+  position:fixed; inset:0; z-index:9999;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--neutral); font-family:'Inter',sans-serif;
+">
+  <div style="
+    background:var(--white); border:1px solid var(--rule); border-radius:12px;
+    padding:36px 32px; width:100%; max-width:320px; text-align:center;
+    box-shadow:0 8px 24px rgba(26,31,46,0.08);
+  ">
+    <div style="font-weight:800; font-size:18px; color:var(--navy); margin-bottom:4px;">
+      The Axtion Week
+    </div>
+    <div style="font-size:12px; color:var(--text-light); margin-bottom:20px;">
+      Enter password to view
+    </div>
+    <input
+      id="gate-input"
+      type="password"
+      placeholder="Password"
+      style="
+        width:100%; box-sizing:border-box; padding:10px 12px;
+        border:1px solid var(--rule); border-radius:6px;
+        font-size:14px; font-family:'Inter',sans-serif;
+        margin-bottom:10px; outline:none;
+      "
+    />
+    <div id="gate-error" style="display:none; color:var(--red); font-size:12px; margin-bottom:10px;">
+      Wrong password
+    </div>
+    <button
+      id="gate-submit"
+      style="
+        width:100%; padding:10px 12px; border:none; border-radius:6px;
+        background:var(--navy); color:#fff; font-weight:600; font-size:14px;
+        font-family:'Inter',sans-serif; cursor:pointer;
+      "
+    >
+      Unlock
+    </button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var GATE_KEY = "axtion_week_unlocked";
+  var PASSWORD_HASH = "2ba4ed212c777250f101057310b6fac1f0aa81da9c712b30847bff0ae34d3664";
+
+  var gateContent = document.getElementById("gate-content");
+  var gateLock = document.getElementById("gate-lock");
+  var gateInput = document.getElementById("gate-input");
+  var gateSubmit = document.getElementById("gate-submit");
+  var gateError = document.getElementById("gate-error");
+
+  function isEmbedded() {
+    try { return window.self !== window.top; } catch (e) { return true; }
+  }
+
+  // Same bridge protocol as signal-fiscal: standalone uses localStorage
+  // directly; embedded in POS, storage is handed off to the parent page
+  // since cross-site iframe storage is unreliable in modern browsers.
+  function bridgeGet(key) {
+    if (!isEmbedded()) {
+      try { return Promise.resolve(localStorage.getItem(key)); }
+      catch (e) { return Promise.resolve(null); }
+    }
+    return new Promise(function (resolve) {
+      var requestId = Math.random().toString(36).slice(2);
+      var done = false;
+      function handler(event) {
+        if (event.data && event.data.type === "pos-storage-get-reply" && event.data.requestId === requestId) {
+          done = true;
+          window.removeEventListener("message", handler);
+          resolve(event.data.value);
+        }
+      }
+      window.addEventListener("message", handler);
+      window.parent.postMessage({ type: "pos-storage-get", key: key, requestId: requestId }, "*");
+      setTimeout(function () {
+        if (!done) { window.removeEventListener("message", handler); resolve(null); }
+      }, 800);
+    });
+  }
+
+  function bridgeSet(key, value) {
+    if (!isEmbedded()) {
+      try { localStorage.setItem(key, value); } catch (e) {}
+      return;
+    }
+    window.parent.postMessage({ type: "pos-storage-set", key: key, value: value }, "*");
+  }
+
+  function sha256Hex(text) {
+    var data = new TextEncoder().encode(text);
+    return crypto.subtle.digest("SHA-256", data).then(function (buf) {
+      return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+        return b.toString(16).padStart(2, "0");
+      }).join("");
+    });
+  }
+
+  function unlock() {
+    gateLock.style.display = "none";
+    gateContent.style.display = "block";
+  }
+
+  function tryPassword() {
+    var val = gateInput.value;
+    sha256Hex(val).then(function (hash) {
+      if (hash === PASSWORD_HASH) {
+        bridgeSet(GATE_KEY, "granted");
+        gateError.style.display = "none";
+        unlock();
+      } else {
+        gateError.style.display = "block";
+      }
+    });
+  }
+
+  gateSubmit.addEventListener("click", tryPassword);
+  gateInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") tryPassword();
+  });
+
+  // Check for an existing unlock before showing the prompt at all.
+  bridgeGet(GATE_KEY).then(function (val) {
+    if (val === "granted") {
+      unlock();
+    } else {
+      gateInput.focus();
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
