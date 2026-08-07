@@ -31,7 +31,24 @@
   .pill{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 13px;border-radius:20px;color:#fff}
   .p-work{background:var(--work)}.p-fam{background:var(--family)}.p-hrs{background:var(--health)}
 
-  .main{display:grid;grid-template-columns:1.8fr 1.6fr 1.1fr 1.2fr 1fr;gap:0}
+  .app-layout{display:flex;align-items:flex-start}
+  .sidenav{width:168px;flex-shrink:0;background:var(--navy);min-height:calc(100vh - 78px);padding:22px 14px;display:flex;flex-direction:column;gap:4px}
+  .sidenav-label{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);padding:0 10px 10px}
+  .nav-item{background:none;border:none;text-align:left;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#aab0c0;padding:10px 10px;border-radius:6px;cursor:pointer;letter-spacing:.2px}
+  .nav-item:hover{background:var(--navy-mid);color:#fff}
+  .nav-item.active{background:var(--navy-light);color:#fff}
+  .pages{flex:1;min-width:0}
+  .page{display:none}
+  .page.active{display:block}
+  #page-overview .bottom{min-height:calc(100vh - 78px)}
+
+  .principles-page{background:var(--navy);padding:24px 32px;min-height:calc(100vh - 78px)}
+  .principles-hd{margin-bottom:20px}
+  .principles-hd .pg-tag{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:4px}
+  .principles-hd .pg-name{font-size:20px;font-weight:900;color:#fff}
+  .principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+
+  .main{display:grid;grid-template-columns:1.8fr 1.6fr 1.1fr 1.2fr;gap:0}
 
   .col{border-right:1px solid var(--rule)}
   .col:last-child{border-right:none}
@@ -150,7 +167,17 @@
   </div>
 </div>
 
-<div class="main">
+<div class="app-layout">
+  <nav class="sidenav">
+    <div class="sidenav-label">Navigate</div>
+    <button class="nav-item active" data-page="schedule" type="button">Schedule</button>
+    <button class="nav-item" data-page="principles" type="button">Principles</button>
+    <button class="nav-item" data-page="overview" type="button">Overview</button>
+  </nav>
+  <div class="pages">
+
+  <div class="page active" id="page-schedule">
+  <div class="main">
 
   <!-- MON / WED -->
   <div class="col">
@@ -454,14 +481,17 @@
     </div>
   </div>
 
-  <!-- SIDEBAR -->
-  <div class="col" style="border-right:none">
-    <div class="col-head ch-side">
-      <div class="col-tag ct-side">System</div>
-      <div class="col-name">Principles</div>
-      <div class="col-line">What runs underneath</div>
+  </div>
+  </div>
+  <!-- /page-schedule -->
+
+  <div class="page" id="page-principles">
+  <div class="principles-page">
+    <div class="principles-hd">
+      <div class="pg-tag">System</div>
+      <div class="pg-name">Principles</div>
     </div>
-    <div class="sidebar">
+    <div class="principles-grid">
 
       <div class="s-sec">
         <h3>System Rules</h3>
@@ -504,11 +534,12 @@
 
     </div>
   </div>
+  </div>
+  <!-- /page-principles -->
 
-</div>
-
-<!-- BOTTOM BAR -->
-<div class="bottom">
+  <div class="page" id="page-overview">
+  <!-- BOTTOM BAR -->
+  <div class="bottom">
 
   <div class="bot-sec">
     <h4>Weekly Hours — 30 hrs</h4>
@@ -570,9 +601,31 @@
     <p>Life over everything.</p>
   </div>
 
+  </div>
+  </div>
+  <!-- /page-overview -->
+
+  </div>
+  <!-- /pages -->
 </div>
+<!-- /app-layout -->
 
 </div>
+
+<script>
+(function () {
+  var navItems = document.querySelectorAll(".nav-item");
+  var pages = document.querySelectorAll(".page");
+  navItems.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      navItems.forEach(function (b) { b.classList.remove("active"); });
+      pages.forEach(function (p) { p.classList.remove("active"); });
+      btn.classList.add("active");
+      document.getElementById("page-" + btn.dataset.page).classList.add("active");
+    });
+  });
+})();
+</script>
 
 <!-- ── PASSWORD GATE ── -->
 <div id="gate-lock" style="
