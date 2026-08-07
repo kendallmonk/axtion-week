@@ -33,7 +33,6 @@
 
   .app-layout{display:flex;align-items:flex-start}
   .sidenav{width:168px;flex-shrink:0;background:var(--navy);min-height:calc(100vh - 78px);padding:22px 14px;display:flex;flex-direction:column;gap:4px}
-  .sidenav-label{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);padding:0 10px 10px}
   .nav-item{background:none;border:none;text-align:left;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#aab0c0;padding:10px 10px;border-radius:6px;cursor:pointer;letter-spacing:.2px}
   .nav-item:hover{background:var(--navy-mid);color:#fff}
   .nav-item.active{background:var(--navy-light);color:#fff}
@@ -42,11 +41,13 @@
   .page.active{display:block}
   #page-overview .bottom{min-height:calc(100vh - 78px)}
 
-  .principles-page{background:var(--navy);padding:24px 32px;min-height:calc(100vh - 78px)}
-  .principles-hd{margin-bottom:20px}
-  .principles-hd .pg-tag{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:4px}
-  .principles-hd .pg-name{font-size:20px;font-weight:900;color:#fff}
-  .principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .card{background:var(--navy-mid);border:1px solid var(--navy-light);border-radius:14px;padding:26px 28px;display:flex;flex-direction:column}
+
+  .principles-page{background:var(--navy);padding:36px 40px;min-height:calc(100vh - 78px)}
+  .principles-hd{margin-bottom:28px}
+  .principles-hd .pg-tag{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--text-light);margin-bottom:6px}
+  .principles-hd .pg-name{font-size:32px;font-weight:900;color:#fff}
+  .principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start}
 
   .main{display:grid;grid-template-columns:1.8fr 1.6fr 1.1fr 1.2fr;gap:0}
 
@@ -103,52 +104,56 @@
   .wb-mgmt{background:linear-gradient(90deg,var(--ba),var(--una))}
   .divider{height:1px;background:var(--rule);margin:2px 12px}
 
-  .sidebar{background:var(--navy);padding:16px 14px;display:flex;flex-direction:column;gap:14px}
-  .s-sec h3{font-size:7px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:7px;padding-bottom:5px;border-bottom:1px solid var(--navy-light)}
-  .rule-item{font-size:8px;color:#aab0c0;line-height:1.7;display:flex;gap:5px}
+  .s-sec h3{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--navy-light)}
+  .rule-item{font-size:13px;color:#c3c9d8;line-height:2.1;display:flex;gap:9px}
   .rule-item::before{content:"—";color:var(--work);font-weight:700;flex-shrink:0}
-  .axed{font-size:8px;color:var(--red);line-height:1.8;display:flex;gap:5px}
+  .axed{font-size:13px;color:var(--red);line-height:2.1;display:flex;gap:9px}
   .axed::before{content:"✕";font-weight:700;flex-shrink:0}
-  .fri-yes{font-size:8px;color:var(--green);line-height:1.8;display:flex;gap:5px}
+  .fri-yes{font-size:13px;color:var(--green);line-height:2.1;display:flex;gap:9px}
   .fri-yes::before{content:"✓";font-weight:700;flex-shrink:0}
 
-  /* BOTTOM */
-  .bottom{background:var(--navy);border-top:2px solid var(--navy-light);padding:18px 32px;display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start}
-  .bot-sec h4{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:9px}
-  .srow{display:flex;align-items:center;gap:8px;margin-bottom:5px}
-  .sbar-w{width:80px;height:4px;background:var(--navy-light);border-radius:2px;overflow:hidden}
-  .sbar{height:100%;border-radius:2px}
-  .slbl{font-size:9px;color:#aab0c0;min-width:110px}
-  .sval{font-size:9px;font-weight:700;color:#fff}
-  .domain-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
-  .dot{width:7px;height:7px;border-radius:50%;margin-top:3px;flex-shrink:0}
-  .dn{font-size:10px;font-weight:700;color:#fff;margin-bottom:1px}
-  .dd{font-size:8px;color:var(--text-light);line-height:1.4}
+  /* OVERVIEW PAGE */
+  .bottom{background:var(--navy);padding:36px 40px}
+  .overview-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;grid-template-areas:"hours domains alt" "hormozi domains phil";gap:28px;align-items:start}
+  .ga-hours{grid-area:hours}
+  .ga-domains{grid-area:domains}
+  .ga-alt{grid-area:alt}
+  .ga-hormozi{grid-area:hormozi}
+  .ga-phil{grid-area:phil}
+  .bot-sec h4{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:18px}
+  .srow{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+  .sbar-w{width:130px;height:6px;background:var(--navy-light);border-radius:3px;overflow:hidden}
+  .sbar{height:100%;border-radius:3px}
+  .slbl{font-size:13px;color:#c3c9d8;min-width:160px}
+  .sval{font-size:13px;font-weight:700;color:#fff}
+  .domain-row{display:flex;align-items:flex-start;gap:11px;margin-bottom:16px}
+  .dot{width:10px;height:10px;border-radius:50%;margin-top:4px;flex-shrink:0}
+  .dn{font-size:14px;font-weight:700;color:#fff;margin-bottom:3px}
+  .dd{font-size:12px;color:var(--text-light);line-height:1.55}
 
   /* Alternating weeks table */
-  .alt-wrap{border-radius:6px;overflow:hidden;border:1px solid var(--navy-light)}
-  .alt-row{display:grid;grid-template-columns:80px 1fr 1fr;font-size:9px}
+  .alt-wrap{border-radius:8px;overflow:hidden;border:1px solid var(--navy-light)}
+  .alt-row{display:grid;grid-template-columns:90px 1fr 1fr;font-size:12px}
   .alt-row.header{background:var(--navy-light)}
   .alt-row.week-a{background:#1e2538}
   .alt-row.week-b{background:#1a1f2e}
-  .alt-cell{padding:7px 10px;color:#aab0c0;border-right:1px solid var(--navy-light)}
+  .alt-cell{padding:11px 14px;color:#c3c9d8;border-right:1px solid var(--navy-light)}
   .alt-cell:last-child{border-right:none}
-  .alt-cell.label{font-weight:700;color:var(--text-light);font-size:8px;letter-spacing:1px;text-transform:uppercase}
+  .alt-cell.label{font-weight:700;color:var(--text-light);font-size:11px;letter-spacing:1px;text-transform:uppercase}
   .alt-cell.myls{color:var(--family);font-weight:700}
   .alt-cell.arc{color:var(--flex);font-weight:700}
-  .alt-cell.hdr{color:var(--text-light);font-weight:700;font-size:8px;letter-spacing:1px;text-transform:uppercase}
+  .alt-cell.hdr{color:var(--text-light);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase}
 
-  .hormozi{background:var(--navy-mid);border-radius:6px;padding:9px 10px}
-  .hz-title{font-size:7px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);margin-bottom:6px}
-  .hz-row{display:flex;align-items:center;gap:6px;margin-bottom:4px}
-  .hz-lbl{font-size:8px;color:#aab0c0;min-width:48px}
-  .hz-bar-w{flex:1;height:4px;background:var(--navy-light);border-radius:2px;overflow:hidden}
-  .hz-bar{height:100%;border-radius:2px}
-  .hz-val{font-size:8px;font-weight:700;color:#fff;min-width:24px;text-align:right}
-  .hz-note{font-size:7px;color:var(--text-light);font-style:italic;margin-top:4px}
+  .hormozi{background:var(--navy);border:1px solid var(--navy-light);border-radius:8px;padding:16px 18px}
+  .hz-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .hz-lbl{font-size:12px;color:#c3c9d8;min-width:64px}
+  .hz-bar-w{flex:1;height:6px;background:var(--navy-light);border-radius:3px;overflow:hidden}
+  .hz-bar{height:100%;border-radius:3px}
+  .hz-val{font-size:12px;font-weight:700;color:#fff;min-width:34px;text-align:right}
+  .hz-note{font-size:10px;color:var(--text-light);font-style:italic;margin-top:8px}
 
-  .phil{margin-left:auto;text-align:right}
-  .phil p{font-size:10px;color:var(--text-light);font-style:italic;line-height:2}
+  .phil{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+  .phil p{font-size:19px;color:#dfe2ea;font-style:italic;line-height:2.1;font-weight:300}
 </style>
 </head>
 <body>
@@ -169,7 +174,6 @@
 
 <div class="app-layout">
   <nav class="sidenav">
-    <div class="sidenav-label">Navigate</div>
     <button class="nav-item active" data-page="schedule" type="button">Schedule</button>
     <button class="nav-item" data-page="principles" type="button">Principles</button>
     <button class="nav-item" data-page="overview" type="button">Overview</button>
@@ -493,7 +497,7 @@
     </div>
     <div class="principles-grid">
 
-      <div class="s-sec">
+      <div class="s-sec card">
         <h3>System Rules</h3>
         <div class="rule-item">6am workout · always first</div>
         <div class="rule-item">Mon/Wed — Mobility + Strength</div>
@@ -512,7 +516,7 @@
         <div class="rule-item">10pm sleep · No phones in bedroom</div>
       </div>
 
-      <div class="s-sec">
+      <div class="s-sec card">
         <h3>Friday Logic</h3>
         <div class="fri-yes">No school — Elliot's day off</div>
         <div class="fri-yes">Same morning shape, no rush</div>
@@ -522,7 +526,7 @@
         <div class="fri-yes">Zone 2 floats to any of Fri–Sun</div>
       </div>
 
-      <div class="s-sec">
+      <div class="s-sec card">
         <h3>Axed</h3>
         <div class="axed">Harmonica · 3D Design</div>
         <div class="axed">Work on family / off days</div>
@@ -540,8 +544,9 @@
   <div class="page" id="page-overview">
   <!-- BOTTOM BAR -->
   <div class="bottom">
+  <div class="overview-grid">
 
-  <div class="bot-sec">
+  <div class="bot-sec card ga-hours">
     <h4>Weekly Hours — 30 hrs</h4>
     <div class="srow"><span class="slbl">Block A (Mon–Thu)</span><div class="sbar-w"><div class="sbar" style="width:53%;background:var(--work)"></div></div><span class="sval">4 hrs × 4 = 16</span></div>
     <div class="srow"><span class="slbl">Block B (Mon–Thu)</span><div class="sbar-w"><div class="sbar" style="width:27%;background:#7c52c8"></div></div><span class="sval">2 hrs × 4 = 8</span></div>
@@ -553,7 +558,7 @@
     </div>
   </div>
 
-  <div class="bot-sec">
+  <div class="bot-sec card ga-domains">
     <h4>Core Domains</h4>
     <div class="domain-row"><div class="dot" style="background:var(--work)"></div><div><div class="dn">Signal / KendallMonk.com</div><div class="dd">Systems thinking · Writing · Publishing · 66.7% · 16 hrs/wk · Block A, all 4 days</div></div></div>
     <div class="domain-row"><div class="dot" style="background:var(--family)"></div><div><div class="dn">MYLS</div><div class="dd">Music · HumanAI · Creative · 8.3% avg · 4 hrs/wk on-week · Week 1 · Tue + Thu Block B</div></div></div>
@@ -563,7 +568,7 @@
     <div class="domain-row"><div class="dot" style="background:var(--read)"></div><div><div class="dn">Reading</div><div class="dd">Non-fiction · Folded into lunch · Daily 12:30–1:30</div></div></div>
   </div>
 
-  <div class="bot-sec">
+  <div class="bot-sec card ga-alt">
     <h4>Alternating Weeks</h4>
     <div class="alt-wrap">
       <div class="alt-row header">
@@ -582,10 +587,10 @@
         <div class="alt-cell arc">The Arc · 2 hrs</div>
       </div>
     </div>
-    <p style="font-size:8px;color:var(--text-light);margin-top:7px;font-style:italic">4 hrs per domain per fortnight · Never both in the same week</p>
+    <p style="font-size:11px;color:var(--text-light);margin-top:12px;font-style:italic">4 hrs per domain per fortnight · Never both in the same week</p>
   </div>
 
-  <div class="bot-sec">
+  <div class="bot-sec card ga-hormozi">
     <h4>Hormozi Split <span class="badge badge-postlaunch">Post-Launch</span></h4>
     <div class="hormozi">
       <div class="hz-row"><span class="hz-lbl">Build</span><div class="hz-bar-w"><div class="hz-bar" style="width:50%;background:var(--work)"></div></div><span class="hz-val">50%</span></div>
@@ -595,12 +600,13 @@
     </div>
   </div>
 
-  <div class="phil">
+  <div class="phil card ga-phil">
     <p>Coherence over optimisation.</p>
     <p>Long-term over short-term.</p>
     <p>Life over everything.</p>
   </div>
 
+  </div>
   </div>
   </div>
   <!-- /page-overview -->
