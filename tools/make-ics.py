@@ -27,10 +27,10 @@ DELIBERATELY NOT HERE
   Sunday's all-day family block. Sunday therefore carries only movement
   and breakfast.
 
-  Meditation is ten minutes here (8:15-8:25 / 7:45-7:55), matching the doc
-  and the block's own label. The app's grid draws it running to the start
-  of Block A to close a visual gap; that stretch is a rendering choice, not
-  a longer sit.
+  Meditation is the fifteen-minute window (8:15-8:30 / 7:45-8:00), not the
+  ten solid minutes inside it. Blocking the window is the point: it stops
+  the sit becoming another thing to be late for. Settled 21 Sep 2026; the
+  1 November decision point is closed.
 
 Do not commit the generated .ics. The site's password gate is client-side
 only, so anything in this repo is served unprotected.
@@ -60,8 +60,8 @@ EVENTS = [
     # --- drop-off week ---------------------------------------------------
     ("School Run \u2014 Drop-off", "My week. Kate picks up.",
      "07:45", "08:15", "MO,TU,WE", "drop"),
-    ("Meditation", "Quiet. Intention. Begin. Held pending the 1 November 2026 decision.",
-     "08:15", "08:25", "MO,TU,WE", "drop"),
+    ("Meditation", "Quiet. Intention. Begin. A fifteen-minute window to get ten solid minutes in. Settled 21 September 2026.",
+     "08:15", "08:30", "MO,TU,WE", "drop"),
     ("Block A \u2014 KM + Signal", "Protected. The deepest work of the day. No admin, no other projects, nothing else gets in. Never reallocates.",
      "08:30", "11:30", "MO,TU,WE", "drop"),
     ("Block B \u2014 KM + Signal", "The weakest slot in the week. Plan it as such rather than expecting depth. Third in the losing order.",
@@ -72,8 +72,8 @@ EVENTS = [
      "12:00", "14:30", "TU", "drop"),
 
     # --- pickup week -----------------------------------------------------
-    ("Meditation", "Quiet. Intention. Begin. Kate does the drop-off this week.",
-     "07:45", "07:55", "MO,TU,WE", "pick"),
+    ("Meditation", "Quiet. Intention. Begin. A fifteen-minute window to get ten solid minutes in. Kate does the drop-off this week.",
+     "07:45", "08:00", "MO,TU,WE", "pick"),
     ("Block A \u2014 KM + Signal", "Protected. The deepest work of the day. No admin, no other projects, nothing else gets in. Never reallocates.",
      "08:00", "11:30", "MO,TU,WE", "pick"),
     ("Block B \u2014 KM + Signal", "The weakest slot in the week. Plan it as such rather than expecting depth. Third in the losing order.",
@@ -98,8 +98,8 @@ EVENTS = [
      "15:00", "17:30", "TU", "weekly"),
 
     # --- Thursday --------------------------------------------------------
-    ("Meditation", "Quiet. Intention. Begin. No school run either end today.",
-     "07:45", "07:55", "TH", "weekly"),
+    ("Meditation", "Quiet. Intention. Begin. A fifteen-minute window to get ten solid minutes in. No school run either end today.",
+     "07:45", "08:00", "TH", "weekly"),
     ("Block A \u2014 KM + Signal", "Protected. Nanny 8:00\u20134:00. No admin, no other projects.",
      "08:00", "11:30", "TH", "weekly"),
     ("Block B \u2014 MYLS / Arc / Unaserism / BA",
